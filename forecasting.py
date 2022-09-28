@@ -1,25 +1,18 @@
-# import logging
-# import threading
-# import subprocess
-# import multiprocessing
+from datetime import datetime
 
-from utils import YandexWeatherAPI, CITIES
-from tasks import (
-    DataFetchingTask,
-    DataCalculationTask,
-    DataAggregationTask,
-    DataAnalyzingTask,
-)
+from tasks import DataAnalyzingTask
 
 
 def forecast_weather():
     """
     Анализ погодных условий по городам
     """
-    # city_name = "MOSCOW"
-    # ywAPI = YandexWeatherAPI()
-    # resp = ywAPI.get_forecasting(city_name)
-    pass
+    start = datetime.now()
+    dant = DataAnalyzingTask()
+    dant.collect_data()
+    dant.save_to_csv()
+    print(dant.choose_best())
+    print(datetime.now() - start)
 
 
 if __name__ == "__main__":
